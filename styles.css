@@ -1,0 +1,118 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+:root {
+    --bg-page: #09090b;
+    --bg-card: #18181b;
+    --border: rgba(255, 255, 255, 0.08);
+    --primary: #6366f1;
+    --primary-glow: rgba(99, 102, 241, 0.4);
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Глобальное свечение */
+.glow-bg {
+    position: fixed;
+    top: -20%; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
+    z-index: -1; opacity: 0.4; pointer-events: none;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    flex: 1;
+    width: 100%;
+}
+
+/* Шапка */
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 0; backdrop-filter: blur(10px);
+    margin-bottom: 40px;
+}
+
+.logo { font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
+.logo i { color: var(--primary); }
+
+.nav-menu {
+    display: flex; gap: 8px; /* Отступы между кнопками */
+    background: rgba(255,255,255,0.03);
+    padding: 6px 6px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.nav-menu a:hover { color: var(--text-main); background: rgba(255,255,255,0.05); }
+.nav-menu a.active { background: rgba(255,255,255,0.1); color: var(--text-main); }
+
+.btn-primary {
+    background: var(--primary); color: white; padding: 10px 20px;
+    border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    transition: 0.2s; box-shadow: 0 0 0 0 var(--primary-glow);
+}
+.btn-primary:hover { box-shadow: 0 0 20px -5px var(--primary-glow); transform: translateY(-1px); }
+
+/* Элементы страниц */
+.hero { padding: 80px 0; text-align: center; }
+.badge { display: inline-block; background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 6px 12px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(99, 102, 241, 0.2); }
+h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; }
+h1 span { background: linear-gradient(90deg, #fff, #a5a6f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.lead { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
+.page-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+.page-desc { color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem; }
+
+/* Карточки и сетки */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.card { background: var(--bg-card); border: 1px solid var(--border); padding: 32px; border-radius: 24px; transition: 0.3s; }
+.card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-4px); }
+
+.icon-box { width: 48px; height: 48px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--text-main); margin-bottom: 20px; }
+h3 { font-size: 1.2rem; margin-bottom: 8px; font-weight: 700; }
+p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* Локации */
+.loc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
+.loc-card:hover { border-color: var(--primary); }
+.loc-img { height: 200px; width: 100%; background-size: cover; background-position: center; }
+.loc-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.loc-tags { display: flex; gap: 8px; margin-bottom: 16px; }
+.tag { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.05); color: var(--text-muted); }
+.tag.active { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.btn-outline { display: block; text-align: center; width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); text-decoration: none; font-weight: 600; transition: 0.2s; margin-top: auto; }
+.btn-outline:hover { background: white; color: black; border-color: white; }
+
+footer { border-top: 1px solid var(--border); margin-top: 80px; padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .nav-menu { display: none; } 
+    /* В мобильной версии меню можно скрыть или сделать бургер, пока скрыл для простоты */
+}

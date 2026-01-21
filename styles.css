@@ -1,15 +1,18 @@
-/* styles.css */
+/* styles.css - ОБНОВЛЕННАЯ ЦВЕТОВАЯ СХЕМА */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
 :root {
-    --bg-page: #09090b;
-    --bg-card: #18181b;
-    --border: rgba(255, 255, 255, 0.08);
-    --primary: #6366f1;
-    --primary-glow: rgba(99, 102, 241, 0.4);
-    --text-main: #ffffff;
-    --text-muted: #a1a1aa;
+    /* Цвета с картинки: Черный + Яркий Желтый */
+    --bg-page: #000000;       /* Абсолютный черный */
+    --bg-card: #0a0a0a;       /* Едва заметный серый для карточек */
+    --border: rgba(255, 255, 255, 0.15); /* Более яркие границы */
+    
+    --primary: #ffcc00;       /* Тот самый желтый с картинки */
+    --primary-glow: rgba(255, 204, 0, 0.25); /* Желтое свечение */
+    
+    --text-main: #ffffff;     /* Белый текст */
+    --text-muted: #aaaaaa;    /* Светло-серый текст */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,13 +28,28 @@ body {
     min-height: 100vh;
 }
 
-/* Глобальное свечение */
+/* Фоновое свечение (Желтое) */
 .glow-bg {
     position: fixed;
-    top: -20%; left: 50%; transform: translateX(-50%);
-    width: 800px; height: 800px;
+    top: -30%; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
     background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
-    z-index: -1; opacity: 0.4; pointer-events: none;
+    z-index: -1; opacity: 0.6; pointer-events: none;
+}
+
+/* Добавляем звезды на фон, как на картинке */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    opacity: 0.2;
+    z-index: -2;
 }
 
 .container {
@@ -45,16 +63,17 @@ body {
 /* Шапка */
 header {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 24px 0; backdrop-filter: blur(10px);
+    padding: 24px 0; backdrop-filter: blur(5px);
     margin-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .logo { font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
 .logo i { color: var(--primary); }
 
 .nav-menu {
-    display: flex; gap: 8px; /* Отступы между кнопками */
-    background: rgba(255,255,255,0.03);
+    display: flex; gap: 8px;
+    background: rgba(255,255,255,0.05); /* Чуть светлее фон меню */
     padding: 6px 6px;
     border-radius: 100px;
     border: 1px solid var(--border);
@@ -63,56 +82,110 @@ header {
 .nav-menu a {
     text-decoration: none;
     color: var(--text-muted);
-    font-weight: 600;
+    font-weight: 700; /* Жирнее шрифт */
     font-size: 0.9rem;
     padding: 8px 16px;
     border-radius: 20px;
     transition: 0.2s;
 }
 
-.nav-menu a:hover { color: var(--text-main); background: rgba(255,255,255,0.05); }
-.nav-menu a.active { background: rgba(255,255,255,0.1); color: var(--text-main); }
+.nav-menu a:hover { color: var(--text-main); background: rgba(255,255,255,0.1); }
+.nav-menu a.active { background: var(--text-main); color: black; } /* Активная кнопка теперь белая с черным текстом для контраста */
 
+/* Кнопки - ЖЕЛТЫЕ с ЧЕРНЫМ текстом (для читаемости) */
 .btn-primary {
-    background: var(--primary); color: white; padding: 10px 20px;
-    border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-    transition: 0.2s; box-shadow: 0 0 0 0 var(--primary-glow);
+    background: var(--primary); 
+    color: #000000; /* Черный текст на желтом фоне */
+    padding: 10px 24px;
+    border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 0.9rem;
+    transition: 0.2s; box-shadow: 0 0 15px var(--primary-glow);
+    text-transform: uppercase; /* Как на картинке */
+    letter-spacing: 0.5px;
 }
-.btn-primary:hover { box-shadow: 0 0 20px -5px var(--primary-glow); transform: translateY(-1px); }
+.btn-primary:hover { 
+    background: #ffe066; 
+    box-shadow: 0 0 25px var(--primary-glow); 
+    transform: translateY(-2px); 
+}
 
 /* Элементы страниц */
 .hero { padding: 80px 0; text-align: center; }
-.badge { display: inline-block; background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 6px 12px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(99, 102, 241, 0.2); }
-h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; }
-h1 span { background: linear-gradient(90deg, #fff, #a5a6f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Бейдж - желтая обводка */
+.badge { 
+    display: inline-block; 
+    background: transparent; 
+    color: var(--primary); 
+    padding: 6px 12px; border-radius: 100px; 
+    font-size: 0.8rem; font-weight: 700; margin-bottom: 24px; 
+    border: 1px solid var(--primary); 
+}
+
+h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; color: white; }
+
+/* Тот самый желтый текст из картинки */
+h1 span { 
+    color: var(--primary);
+    background: none;
+    -webkit-text-fill-color: initial;
+    text-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+}
+
 .lead { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
-.page-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+.page-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
 .page-desc { color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem; }
 
-/* Карточки и сетки */
+/* Карточки */
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-.card { background: var(--bg-card); border: 1px solid var(--border); padding: 32px; border-radius: 24px; transition: 0.3s; }
-.card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-4px); }
 
-.icon-box { width: 48px; height: 48px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--text-main); margin-bottom: 20px; }
-h3 { font-size: 1.2rem; margin-bottom: 8px; font-weight: 700; }
+.card { 
+    background: var(--bg-card); 
+    border: 1px solid var(--border); 
+    padding: 32px; border-radius: 24px; transition: 0.3s; 
+}
+.card:hover { 
+    border-color: var(--primary); /* При наведении рамка становится желтой */
+    transform: translateY(-4px); 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.icon-box { 
+    width: 48px; height: 48px; 
+    background: rgba(255, 204, 0, 0.1); /* Желтый фон иконки */
+    border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+    font-size: 1.2rem; 
+    color: var(--primary); /* Желтая иконка */
+    margin-bottom: 20px; 
+}
+
+h3 { font-size: 1.2rem; margin-bottom: 8px; font-weight: 700; color: white; }
 p { color: var(--text-muted); font-size: 0.95rem; }
 
 /* Локации */
 .loc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
 .loc-card:hover { border-color: var(--primary); }
-.loc-img { height: 200px; width: 100%; background-size: cover; background-position: center; }
+.loc-img { height: 200px; width: 100%; background-size: cover; background-position: center; filter: grayscale(20%); } /* Чуть приглушил цвета фото */
 .loc-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+
 .loc-tags { display: flex; gap: 8px; margin-bottom: 16px; }
-.tag { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.05); color: var(--text-muted); }
-.tag.active { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
-.btn-outline { display: block; text-align: center; width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); text-decoration: none; font-weight: 600; transition: 0.2s; margin-top: auto; }
-.btn-outline:hover { background: white; color: black; border-color: white; }
+.tag { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: white; }
+.tag.active { background: var(--primary); color: black; } /* Активный тег желтый */
+
+.btn-outline { 
+    display: block; text-align: center; width: 100%; padding: 10px; 
+    border: 1px solid var(--border); border-radius: 12px; 
+    color: white; text-decoration: none; font-weight: 600; 
+    transition: 0.2s; margin-top: auto; 
+}
+.btn-outline:hover { 
+    background: var(--primary); 
+    color: black; 
+    border-color: var(--primary); 
+}
 
 footer { border-top: 1px solid var(--border); margin-top: 80px; padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
 
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
     .nav-menu { display: none; } 
-    /* В мобильной версии меню можно скрыть или сделать бургер, пока скрыл для простоты */
 }

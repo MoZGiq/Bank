@@ -1,191 +1,248 @@
-/* styles.css - ОБНОВЛЕННАЯ ЦВЕТОВАЯ СХЕМА */
+/* === styles.css === */
+
+/* 1. Подключение шрифтов и иконок */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
+/* 2. Настройки цветов (Черный и Желтый) */
 :root {
-    /* Цвета с картинки: Черный + Яркий Желтый */
-    --bg-page: #000000;       /* Абсолютный черный */
-    --bg-card: #0a0a0a;       /* Едва заметный серый для карточек */
-    --border: rgba(255, 255, 255, 0.15); /* Более яркие границы */
-    
-    --primary: #ffcc00;       /* Тот самый желтый с картинки */
-    --primary-glow: rgba(255, 204, 0, 0.25); /* Желтое свечение */
-    
+    --bg-body: #050505;       /* Почти черный фон */
+    --bg-card: #121212;       /* Темно-серый для карточек */
+    --primary: #ffcc00;       /* Яркий желтый */
     --text-main: #ffffff;     /* Белый текст */
-    --text-muted: #aaaaaa;    /* Светло-серый текст */
+    --text-muted: #999999;    /* Серый текст */
+    --border: rgba(255, 255, 255, 0.1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* 3. Базовые сбросы */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
-    background-color: var(--bg-page);
+    background-color: var(--bg-body);
     color: var(--text-main);
     font-family: 'Manrope', sans-serif;
     line-height: 1.5;
-    overflow-x: hidden;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
-/* Фоновое свечение (Желтое) */
-.glow-bg {
-    position: fixed;
-    top: -30%; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
-    z-index: -1; opacity: 0.6; pointer-events: none;
-}
-
-/* Добавляем звезды на фон, как на картинке */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: 
-        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-    background-size: 550px 550px, 350px 350px, 250px 250px;
-    background-position: 0 0, 40px 60px, 130px 270px;
-    opacity: 0.2;
-    z-index: -2;
-}
-
+/* Контейнер для центрирования */
 .container {
+    width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 24px;
-    flex: 1;
-    width: 100%;
+    padding: 0 20px;
+    flex: 1; /* Чтобы футер прижимался к низу */
 }
 
-/* Шапка */
+/* 4. Шапка (Header) */
 header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 24px 0; backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
     margin-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.logo { font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
+.logo {
+    text-decoration: none;
+    color: white;
+    font-weight: 800;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .logo i { color: var(--primary); }
 
+/* Меню навигации */
 .nav-menu {
-    display: flex; gap: 8px;
-    background: rgba(255,255,255,0.05); /* Чуть светлее фон меню */
-    padding: 6px 6px;
-    border-radius: 100px;
-    border: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    background: #1a1a1a;
+    padding: 5px;
+    border-radius: 50px;
 }
 
 .nav-menu a {
     text-decoration: none;
     color: var(--text-muted);
-    font-weight: 700; /* Жирнее шрифт */
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 25px;
+    transition: 0.3s;
     font-size: 0.9rem;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: 0.2s;
 }
 
-.nav-menu a:hover { color: var(--text-main); background: rgba(255,255,255,0.1); }
-.nav-menu a.active { background: var(--text-main); color: black; } /* Активная кнопка теперь белая с черным текстом для контраста */
-
-/* Кнопки - ЖЕЛТЫЕ с ЧЕРНЫМ текстом (для читаемости) */
-.btn-primary {
-    background: var(--primary); 
-    color: #000000; /* Черный текст на желтом фоне */
-    padding: 10px 24px;
-    border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 0.9rem;
-    transition: 0.2s; box-shadow: 0 0 15px var(--primary-glow);
-    text-transform: uppercase; /* Как на картинке */
-    letter-spacing: 0.5px;
-}
-.btn-primary:hover { 
-    background: #ffe066; 
-    box-shadow: 0 0 25px var(--primary-glow); 
-    transform: translateY(-2px); 
-}
-
-/* Элементы страниц */
-.hero { padding: 80px 0; text-align: center; }
-
-/* Бейдж - желтая обводка */
-.badge { 
-    display: inline-block; 
-    background: transparent; 
-    color: var(--primary); 
-    padding: 6px 12px; border-radius: 100px; 
-    font-size: 0.8rem; font-weight: 700; margin-bottom: 24px; 
-    border: 1px solid var(--primary); 
-}
-
-h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; color: white; }
-
-/* Тот самый желтый текст из картинки */
-h1 span { 
-    color: var(--primary);
-    background: none;
-    -webkit-text-fill-color: initial;
-    text-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
-}
-
-.lead { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
-.page-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
-.page-desc { color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem; }
-
-/* Карточки */
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-
-.card { 
-    background: var(--bg-card); 
-    border: 1px solid var(--border); 
-    padding: 32px; border-radius: 24px; transition: 0.3s; 
-}
-.card:hover { 
-    border-color: var(--primary); /* При наведении рамка становится желтой */
-    transform: translateY(-4px); 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-}
-
-.icon-box { 
-    width: 48px; height: 48px; 
-    background: rgba(255, 204, 0, 0.1); /* Желтый фон иконки */
-    border-radius: 12px; display: flex; align-items: center; justify-content: center; 
-    font-size: 1.2rem; 
-    color: var(--primary); /* Желтая иконка */
-    margin-bottom: 20px; 
-}
-
-h3 { font-size: 1.2rem; margin-bottom: 8px; font-weight: 700; color: white; }
-p { color: var(--text-muted); font-size: 0.95rem; }
-
-/* Локации */
-.loc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
-.loc-card:hover { border-color: var(--primary); }
-.loc-img { height: 200px; width: 100%; background-size: cover; background-position: center; filter: grayscale(20%); } /* Чуть приглушил цвета фото */
-.loc-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
-
-.loc-tags { display: flex; gap: 8px; margin-bottom: 16px; }
-.tag { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: white; }
-.tag.active { background: var(--primary); color: black; } /* Активный тег желтый */
-
-.btn-outline { 
-    display: block; text-align: center; width: 100%; padding: 10px; 
-    border: 1px solid var(--border); border-radius: 12px; 
-    color: white; text-decoration: none; font-weight: 600; 
-    transition: 0.2s; margin-top: auto; 
-}
-.btn-outline:hover { 
+.nav-menu a:hover { color: white; }
+.nav-menu a.active { 
     background: var(--primary); 
     color: black; 
-    border-color: var(--primary); 
 }
 
-footer { border-top: 1px solid var(--border); margin-top: 80px; padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+/* Кнопка "Войти" */
+.btn-primary {
+    background: var(--primary);
+    color: black;
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 800;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+.btn-primary:hover {
+    background: white;
+    box-shadow: 0 0 15px var(--primary);
+}
 
+/* 5. Главный блок (Hero) */
+.hero {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.badge {
+    display: inline-block;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: white;
+}
+h1 span { color: var(--primary); }
+
+.lead {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+/* Второстепенная кнопка */
+.btn-outline {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* 6. Сетка карточек */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+/* Стиль карточки */
+.card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    transition: 0.3s;
+}
+.card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.icon-box {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 204, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+h3 { margin-bottom: 10px; color: white; }
+p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* Заголовки страниц */
+.page-title { font-size: 2.5rem; margin-bottom: 10px; color: var(--primary); }
+.page-desc { color: var(--text-muted); margin-bottom: 40px; }
+
+/* 7. Локации */
+.loc-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+.loc-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(30%);
+}
+.loc-body { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+
+.loc-tags { margin-bottom: 15px; display: flex; gap: 10px; }
+.tag {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    background: #333;
+    border-radius: 5px;
+    color: #ccc;
+}
+.tag.active { background: var(--primary); color: black; font-weight: bold; }
+
+.btn-full {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.btn-full:hover { background: var(--primary); color: black; }
+
+/* 8. Футер */
+footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    text-align: center;
+    margin-top: auto;
+    color: var(--text-muted);
+}
+
+/* Мобильная адаптация */
 @media (max-width: 768px) {
+    .nav-menu { display: none; } /* Скрываем меню на телефонах */
     h1 { font-size: 2.5rem; }
-    .nav-menu { display: none; } 
 }
